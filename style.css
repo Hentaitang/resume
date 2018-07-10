@@ -307,12 +307,12 @@ section.portfolio > nav > ol{
 
 section.portfolio > nav > ol > li{
     float: left;
-    margin-left: 40px;
+    margin-right: 40px;
     cursor: pointer;
 }
 
-section.portfolio > nav > ol > li:nth-child(1){
-    margin-left: 0;
+section.portfolio > nav > ol > li:nth-child(3){
+    margin-right: 0;
 }
 
 section.portfolio > nav .bar{
@@ -354,3 +354,4 @@ section.portfolio .works > .big,
 section.portfolio .works > .small{
     position: absolute;
 }
+
