@@ -78,7 +78,7 @@
       <div class="mask"></div>
     </div>
     <main>
-      <div class="userCard" id="siteAbout">
+      <div data-x class="userCard" id="siteAbout">
         <div class="pictureANDtext clearfix">
           <div class="picture">
             <img src="./img/startuper-1.jpg" width=295 height=342 alt="头像">
@@ -139,7 +139,7 @@
     </p>
 
     </main>
-    <section class="skills" id="siteSkills">
+    <section data-x class="skills" id="siteSkills">
       <h2 class="">技能</h2>
       <ol class="clearfix">
         <li>
@@ -147,7 +147,7 @@
             HTML5 &amp; CSS 3
           </h3>
           <div class="progressBar">
-            <div class="progress"></div>
+            <div class="progress" style="width: 60%;"></div>
           </div>
         </li>
         <li>
@@ -155,7 +155,7 @@
             JavaScript
           </h3>
           <div class="progressBar">
-            <div class="progress"></div>
+            <div class="progress" style="width: 30%;"></div>
           </div>
         </li>
         <li>
@@ -163,7 +163,7 @@
             jQuery
           </h3>
           <div class="progressBar">
-            <div class="progress"></div>
+            <div class="progress" style="width: 10%;"></div>
           </div>
         </li>
         <li>
@@ -171,7 +171,7 @@
             vue.js
           </h3>
           <div class="progressBar">
-            <div class="progress"></div>
+            <div class="progress" style="width: 10%;"></div>
           </div>
         </li>
         <li>
@@ -179,7 +179,7 @@
             React.js
           </h3>
           <div class="progressBar">
-            <div class="progress"></div>
+            <div class="progress" style="width: 10%;"></div>
           </div>
         </li>
         <li>
@@ -187,12 +187,12 @@
             Node.js
           </h3>
           <div class="progressBar">
-            <div class="progress"></div>
+            <div class="progress" style="width: 30%;"></div>
           </div>
         </li>
       </ol>
     </section>
-    <section class="portfolio" id="siteWorks">
+    <section data-x class="portfolio" id="siteWorks">
       <h2>作品集</h2>
       <nav>
         <ol class="clearfix">
@@ -227,11 +227,20 @@
         </div>
       </div>
     </section> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tween.js/16.3.5/Tween.min.js"></script>
     <script>
       setTimeout(function(){
         siteWelcome.classList.remove('active')
       }, 2000)
+      // 添加 offset 类
+      let specialTags = document.querySelectorAll('[data-x]')
+      for(let i = 0; i < specialTags.length; i++){
+        specialTags[i].classList.add('offset')
+      }
+      setTimeout(function(){findclosest()}, 1700)
+      
       window.onscroll = function(){
+        findclosest()
         if(window.scrollY > 0){
           topNavBar.classList.add('sticky')
         }else{
@@ -239,7 +248,7 @@
         }
       }
       let liTags = document.querySelectorAll('nav.menu > ul > li')
-
+      
       for(let i=0; i<liTags.length; i++){
         liTags[i].onmouseenter = function(x){
           x.currentTarget.classList.add('active')
@@ -249,16 +258,52 @@
         }  
       }
       let aTags = document.querySelectorAll('nav.menu > ul > li > a')
+      function animate(time) {
+            requestAnimationFrame(animate);
+            TWEEN.update(time);
+          }
+          requestAnimationFrame(animate);
       for(let i=0; i<aTags.length; i++){
         aTags[i].onclick = function(x){
           x.preventDefault()
-          let a =x.currentTarget
-          let href = a.getAttribute('href') //'#siteAbout'
-          let element = document.querySelector(href)
-          let top = element.offsetTop
-          window.scrollTo(0, top-80)
+          let top = document.querySelector(x.currentTarget.getAttribute('href')).offsetTop
+          let currentTop = window.scrollY
+          let targetTop = top - 80
+          let distance = targetTop - currentTop
+          let t = (Math.abs(distance) / 100) * 300
+          if(t>500){ t=500 }
+          var coords = {y: currentTop}; 
+          var tween = new TWEEN.Tween(coords)
+            .to({y: targetTop}, t)
+            .easing(TWEEN.Easing.Quadratic.InOut) 
+            .onUpdate(function() { 
+              window.scrollTo(0, coords.y);
+            })
+            .start();
         }
       }
+      function findclosest(){
+          let specialTags = document.querySelectorAll('[data-x]')
+          let minindex = 0
+          for(let i = 1; i < specialTags.length; i++){
+            if(Math.abs(specialTags[i].offsetTop - window.scrollY) < Math.abs(specialTags[minindex].offsetTop - window.scrollY)){
+              minindex = i
+            }
+          }
+          // minindex就是离窗口顶部最近的元素
+          specialTags[minindex].classList.remove('offset')
+          let id = specialTags[minindex].id
+          let a = document.querySelector('a[href="#' + id + '"]')
+          let li = a.parentNode
+          let brothers = li.parentNode.children
+          for(let i = 0; i < brothers.length; i++){
+            brothers[i].classList.remove('highlight')
+          }
+          li.classList.add('highlight')
+          if(window.scrollY === 0){
+            li.classList.remove('highlight')
+          }
+        }     
     </script>
   </body>
 </html>
