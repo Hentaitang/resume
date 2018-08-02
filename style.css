@@ -15,13 +15,69 @@ hr{
     border: 1px solid #DEDEDE;
 }
 
+.icon{
+    width: 1em; height: 1em;
+    vertical-align: -0.15em;
+    fill: currentColor;
+    overflow: hidden;
+}
+
+.site-welcome{
+    display: none;
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: #888;
+    z-index: 1;
+    justify-content: center;
+    align-items: center;
+}
+
+.site-welcome.active{
+    display: flex;
+}
+
 ul, ol{
     list-style: none;
+}
+
+.loading{
+    width: 200px;
+    height: 200px;
+    position: relative;
+}
+  
+.loading::before, .loading::after{
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: black;
+    border-radius: 50%;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    animation: s 1.5s linear infinite;
+}
+  
+.loading::after{
+    animation-delay: 0.75s;
+}
+  
+@keyframes s{
+    0%{
+      width: 0; height: 0; opacity: 1;
+    }
+    100%{
+      width: 100px; height: 100px; opacity: 0;
+    }
 }
 
 h1,h2,h3,h4,h5,h6{
     font-weight: normal;
 }
+
 .clearfix::after{
     content: '';
     display: block;
@@ -329,7 +385,6 @@ section.skills > ol > li:nth-child(even){
     float: right;
 }
 
-
 section.skills .progressBar{
     height:5px;
     background-color: #FAE1E1;
@@ -350,7 +405,6 @@ section.skills.offset .progress{
     transform: translateX(-100px);
 }
 
-
 section.skills h3{
     font-size: 14px;
     line-height: 1.1;
@@ -359,67 +413,21 @@ section.skills h3{
     color: #696F79;
 }
 
-
 section.portfolio{
     text-align: center;
     margin-bottom: 100px;
 }
-section.portfolio > nav{
-    display: inline-block;
-    vertical-align: top;
-}
-section.portfolio > nav > ol{
-    display: inline-block;
-    vertical-align: top;
-}
 
-section.portfolio > nav > ol > li{
-    float: left;
-    margin-right: 40px;
-    cursor: pointer;
-}
-
-section.portfolio > nav > ol > li:nth-child(3){
-    margin-right: 0;
-}
-
-section.portfolio > nav .bar{
-    background-color: white;
-    margin-top: 5px;
-    height: 5px;
-    border-radius: 2px;
-}
-
-section.portfolio > nav .bar-inner{
-    background-color: #E8676B;
-    height: 100%;
-    width: 30%;
-    border-radius: 2px;
-    transition: all 0.3s;
-}
-
-section.portfolio > nav .bar.state-1 .bar-inner{
-    margin-left: 0;
-    width: 72px;
-}
-
-section.portfolio > nav .bar.state-2 .bar-inner{
-    margin-left: 72px;
-    width: 72px;
-}
-
-section.portfolio > nav .bar.state-3 .bar-inner{
-    margin-left: 144px;
-    width: 93px;
-}
-
-section.portfolio .works{
+section.portfolio .swiper-container {
     margin-top: 28px;
-    position: relative;
+    width: 668px;
+    height: 501px;
 }
 
-section.portfolio .works > .big,
-section.portfolio .works > .small{
-    position: absolute;
+section.portfolio .swiper-button-prev,
+.swiper-button-next{
+    background-color: white;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
 }
-
