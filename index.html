@@ -163,119 +163,35 @@
     <section data-x class="portfolio" id="siteWorks">
       <h2>作品集</h2>
       <!-- 变成轮播 -->
+
+      <!-- 这就是 view,用户看得见的东西 -->
       <!-- Slider main container -->
-      <div class="swiper-container">
-        <!-- Additional required wrapper -->
-        <div class="swiper-wrapper">
-          <!-- Slides -->
-          <img class="swiper-slide" src="./img/works/nav-page.jpg" alt="导航">
-          <img class="swiper-slide" src="./img/works/canvas-demo.jpg" alt="画板">
-          <img class="swiper-slide" src="./img/works/appleSlide.jpg" alt="轮播">
-          ...
+      <div id="mySlides">
+        <div class="swiper-container">
+          <!-- Additional required wrapper -->
+          <div class="swiper-wrapper">
+            <!-- Slides -->
+            <img class="swiper-slide" src="./img/works/nav-page.jpg" alt="导航">
+            <img class="swiper-slide" src="./img/works/canvas-demo.jpg" alt="画板">
+            <img class="swiper-slide" src="./img/works/appleSlide.jpg" alt="轮播">
+          </div>
+          <!-- If we need pagination -->
+          <div class="swiper-pagination"></div>
         </div>
-        <!-- If we need pagination -->
-        <div class="swiper-pagination"></div>
-  
+        <!-- If we need navigation buttons -->
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
       </div>
-      <!-- If we need navigation buttons -->
-      <div class="swiper-button-prev"></div>
-      <div class="swiper-button-next"></div>
+
     </section> 
     <script src="/node_modules/swiper/dist/js/swiper.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tween.js/16.3.5/Tween.min.js"></script>
-    <script>
-      var mySwiper = new Swiper ('.swiper-container', {
-        // Optional parameters
-        loop: true,
-
-        // If we need pagination
-        pagination: {
-          el: '.swiper-pagination',
-        },
-
-        // Navigation arrows
-        navigation: {
-          nextEl: '.swiper-button-next',
-          prevEl: '.swiper-button-prev',
-        },
-      })
-    </script>
-    <script>
-      setTimeout(function(){
-        siteWelcome.classList.remove('active')
-      }, 2000)
-      // 添加 offset 类
-      let specialTags = document.querySelectorAll('[data-x]')
-      for(let i = 0; i < specialTags.length; i++){
-        specialTags[i].classList.add('offset')
-      }
-      setTimeout(function(){findclosest()}, 1700)
-      
-      window.onscroll = function(){
-        findclosest()
-        if(window.scrollY > 0){
-          topNavBar.classList.add('sticky')
-        }else{
-          topNavBar.classList.remove('sticky')
-        }
-      }
-      let liTags = document.querySelectorAll('nav.menu > ul > li')
-      
-      for(let i=0; i<liTags.length; i++){
-        liTags[i].onmouseenter = function(x){
-          x.currentTarget.classList.add('active')
-        }  
-        liTags[i].onmouseleave = function(x){
-          x.currentTarget.classList.remove('active')
-        }  
-      }
-      let aTags = document.querySelectorAll('nav.menu > ul > li > a')
-      function animate(time) {
-            requestAnimationFrame(animate);
-            TWEEN.update(time);
-          }
-          requestAnimationFrame(animate);
-      for(let i=0; i<aTags.length; i++){
-        aTags[i].onclick = function(x){
-          x.preventDefault()
-          let top = document.querySelector(x.currentTarget.getAttribute('href')).offsetTop
-          let currentTop = window.scrollY
-          let targetTop = top - 80
-          let distance = targetTop - currentTop
-          let t = (Math.abs(distance) / 100) * 300
-          if(t>500){ t=500 }
-          var coords = {y: currentTop}; 
-          var tween = new TWEEN.Tween(coords)
-            .to({y: targetTop}, t)
-            .easing(TWEEN.Easing.Quadratic.InOut) 
-            .onUpdate(function() { 
-              window.scrollTo(0, coords.y);
-            })
-            .start();
-        }
-      }
-      function findclosest(){
-          let specialTags = document.querySelectorAll('[data-x]')
-          let minindex = 0
-          for(let i = 1; i < specialTags.length; i++){
-            if(Math.abs(specialTags[i].offsetTop - window.scrollY) < Math.abs(specialTags[minindex].offsetTop - window.scrollY)){
-              minindex = i
-            }
-          }
-          // minindex就是离窗口顶部最近的元素
-          specialTags[minindex].classList.remove('offset')
-          let id = specialTags[minindex].id
-          let a = document.querySelector('a[href="#' + id + '"]')
-          let li = a.parentNode
-          let brothers = li.parentNode.children
-          for(let i = 0; i < brothers.length; i++){
-            brothers[i].classList.remove('highlight')
-          }
-          li.classList.add('highlight')
-          if(window.scrollY === 0){
-            li.classList.remove('highlight')
-          }
-        }     
-    </script>
+    <!-- 模块化 -->
+    <script src="./js/init-swiper.js"></script>
+    <script src="./js/loading.js"></script>
+    <script src="./js/auto-slide-up.js"></script>
+    <script src="./js/sticky-topbar.js"></script>
+    <script src="./js/smoothy-nav.js"></script>
+    <script src="./js/topbar-mouseEvent.js"></script>
   </body>
 </html>
