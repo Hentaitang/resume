@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/Hentaitang/resume#readme",
   "dependencies": {
+    "leancloud-storage": "^3.9.0",
     "swiper": "^4.3.5"
   }
 }

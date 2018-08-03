@@ -182,7 +182,19 @@
         <div class="swiper-button-prev"></div>
         <div class="swiper-button-next"></div>
       </div>
+    </section>
+    <section class="messages">
+      <h2>留言</h2>
+      <ol id="messageList">
+
+      </ol>
+      <form id="postMessageForm" style="margin: 50px auto; width: 700px">
+        <label>用户名<input type="text" name="name"></label>
+        <label>内容<input type="text" name="content"></label>
+        <input type="submit" value="提交">
+      </form>
     </section> 
+    <script src="./js/vendors/av-min.js"></script>
     <script src="./js/vendors/swiper.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tween.js/16.3.5/Tween.min.js"></script>
     <!-- 模块化 -->
@@ -192,5 +204,6 @@
     <script src="./js/sticky-topbar.js"></script>
     <script src="./js/smoothy-nav.js"></script>
     <script src="./js/topbar-mouseEvent.js"></script>
+    <script src="./js/message.js"></script>
   </body>
 </html>

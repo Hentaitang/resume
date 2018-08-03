@@ -360,6 +360,7 @@ section.portfolio{
 }
 
 section.skills > h2,
+section.messages > h2,
 section.portfolio > h2{ 
     text-align: center;
     color: #3d4451;
@@ -430,4 +431,15 @@ section.portfolio .swiper-button-prev,
     width: 64px;
     height: 64px;
     border-radius: 50%;
+}
+
+section.messages > ol{
+    max-width: 600px;
+    margin: 0 auto;
+    border-top: 1px solid #DDDDDD;
+}
+
+section.messages > ol > li{
+    padding: 16px 16px;
+    border-bottom: 1px solid #DDDDDD;
 }
