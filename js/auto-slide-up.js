@@ -21,6 +21,7 @@
       }
       // minindex就是离窗口顶部最近的元素
       specialTags[minindex].classList.remove('offset')
+      specialTags[minindex].classList.add('comeUp')
       let id = specialTags[minindex].id
       let a = document.querySelector('a[href="#' + id + '"]')
       let li = a.parentNode
